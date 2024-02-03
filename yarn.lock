@@ -1193,6 +1193,26 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
+"@expo-google-fonts/alata@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/alata/-/alata-0.2.3.tgz#485e5dccaca5688dbb5db1be7108f102346c33ca"
+  integrity sha512-FHQ0Hn8KfvxbxaBLFQJOxHUTMp1/aIXZk5Swu14cfZ+KqEeN1ZQVSvPpBdSzkc8s+jS3OLOXqcsvvnqhd83j/w==
+
+"@expo-google-fonts/autour-one@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/autour-one/-/autour-one-0.2.3.tgz#33e462d34829298ff53d8a594c288335fba538e8"
+  integrity sha512-eWluOhnuacohu5RYlke2/C1xYxhYaIoX9cC85yj6+FFOa8U+etwU7P4kNxEKGhPuutj41jP5sNbN51ltl41Uag==
+
+"@expo-google-fonts/bangers@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/bangers/-/bangers-0.2.3.tgz#92e1a40f141d127916b0a9df582f7bed1ba7f0f4"
+  integrity sha512-LHThaq5C1OjTpZwykVIIRbMclCDSHlfWxDxMZz1XvIDSgcMUwMF/aKGsjOeWriik2ijkNW9yIg4Ss8wul8zDgQ==
+
+"@expo-google-fonts/bellota-text@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/bellota-text/-/bellota-text-0.2.3.tgz#bfb0a2774e4b37fbcfacdf7ba7794d3d69694d88"
+  integrity sha512-AXq99xrvE3/HK69w/AiTBF0DZy1ximBK5HevAV/1pBRZfVflp6KHQDc/S4LRBCp7ISg/XTEVunZBx62ffX4hhA==
+
 "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@expo/bunyan/-/bunyan-4.0.0.tgz#be0c1de943c7987a9fbd309ea0b1acd605890c7b"
@@ -2317,6 +2337,11 @@
   dependencies:
     opencollective-postinstall "^2.0.3"
     superstruct "^0.6.2"
+
+"@react-native-firebase/firestore@^18.8.0":
+  version "18.8.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-18.8.0.tgz#77d54794b896ca792c2d97d01fd8e0c0d09bc322"
+  integrity sha512-tB8ZhIYuFoTO4kYXdh5Q+LSPIXxJ5WPrVxxIxdc+qeaF7SudIojO6w/g8tTxbFdPEos8+JWhBIFAb+o0L3RbBQ==
 
 "@react-native/assets-registry@0.73.1", "@react-native/assets-registry@~0.73.1":
   version "0.73.1"
@@ -3835,7 +3860,7 @@ expo-file-system@~16.0.0, expo-file-system@~16.0.5:
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-16.0.5.tgz#7ade3b1295d47a38a2236c5b121069d1bf27a526"
   integrity sha512-JpKMbKfwTaMCbwUwq7MwcSbPR7r+IqZEL3RFam3ClPHDtKLnlEoywREeaDsWjSZb7dS25hG3WqXspfTuugCDvg==
 
-expo-font@~11.10.2:
+expo-font@^11.10.2, expo-font@~11.10.2:
   version "11.10.2"
   resolved "https://registry.yarnpkg.com/expo-font/-/expo-font-11.10.2.tgz#233195c4fa0321763bd89bd7919bf7271a439c3f"
   integrity sha512-AE0Q0LiWiVosQ/jlKUPoWoob7p3GwYM2xmLoUkuopO9RYh9NL1hZKHiMKcWBZyDG8Gww1GtBQwh7ZREST8+jjQ==
@@ -6093,6 +6118,11 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-native-safe-area-context@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.9.0.tgz#21a570ca3594cb4259ba65f93befaa60d91bcbd0"
+  integrity sha512-/OJD9Pb8IURyvn+1tWTszWPJqsbZ4hyHBU9P0xhOmk7h5owSuqL0zkfagU0pg7Vh0G2NKQkaPpUKUMMCUMDh/w==
 
 react-native@0.73.2:
   version "0.73.2"
