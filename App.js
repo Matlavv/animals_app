@@ -8,7 +8,7 @@ import { Keyboard } from "react-native";
 import Articles from "./screens/Articles";
 import HomeScreen from "./screens/HomeScreen";
 import AnimalsStack from "./screens/Stack/AnimalStack";
-import UserProfile from "./screens/UserProfile";
+import ProfileStack from "./screens/Stack/ProfileStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -83,7 +83,7 @@ const App = () => {
         <Tab.Screen name="Mes animaux" component={AnimalsStack} />
 
         <Tab.Screen name="Articles" component={Articles} />
-        <Tab.Screen name="Profil" component={UserProfile} />
+        <Tab.Screen name="Profil" component={ProfileStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );

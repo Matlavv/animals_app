@@ -23,7 +23,7 @@ const HomeScreen = () => {
             <Text
               style={[tw`text-3xl`, { fontFamily: "AutourOne_400Regular" }]}
             >
-              Gerbizzz
+              Animalzz
             </Text>
           </View>
         </View>
