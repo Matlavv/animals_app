@@ -9,6 +9,14 @@ const AnimalDetails = () => {
   const route = useRoute();
   const { animal } = route.params;
 
+  const navigateToMedical = () => {
+    navigation.navigate("Medical");
+  };
+
+  const navigateToUpdateAnimalForm = () => {
+    navigation.navigate("UpdateAnimalForm", { animal: animal });
+  };
+
   return (
     <ScrollView style={tw`flex bg-[#FFE5E4] h-full`}>
       {/* header */}
@@ -19,7 +27,10 @@ const AnimalDetails = () => {
         >
           <Ionicons name={"chevron-back"} size={25} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity style={tw`m-3 mt-7 rounded-md bg-white p-2`}>
+        <TouchableOpacity
+          style={tw`m-3 mt-7 rounded-md bg-white p-2`}
+          onPress={navigateToUpdateAnimalForm}
+        >
           <Ionicons name={"pencil"} size={25} color="black" />
         </TouchableOpacity>
       </View>
@@ -37,6 +48,9 @@ const AnimalDetails = () => {
             ]}
           >
             {animal.name}
+          </Text>
+          <Text style={tw`text-base text-gray-500`}>
+            Adopté le : {animal.adoptionDate} ❤
           </Text>
           <View style={tw`flex-row mt-5`}>
             <View
@@ -117,6 +131,7 @@ const AnimalDetails = () => {
         <View style={tw`flex items-center`}>
           <TouchableOpacity
             style={tw`m-5 items-center p-3 bg-[#D03312] rounded-lg w-5/6`}
+            onPress={navigateToMedical}
           >
             <Text
               style={[

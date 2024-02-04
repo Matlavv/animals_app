@@ -18,6 +18,7 @@ const allAnimals = [
     favoriteFood: "Croquettes",
     favoritePlace: "Parc d'Auvers-sur-Oise",
     favoriteToy: "Balle",
+    adoptionDate: "12/12/2021",
   },
   {
     id: "2",
@@ -32,6 +33,7 @@ const allAnimals = [
     favoriteFood: "Croquettes",
     favoritePlace: "Parc d'Auvers-sur-Oise",
     favoriteToy: "Balle",
+    adoptionDate: "12/12/2021",
   },
   {
     id: "3",
@@ -46,6 +48,7 @@ const allAnimals = [
     favoriteFood: "Croquettes",
     favoritePlace: "Parc d'Auvers-sur-Oise",
     favoriteToy: "Balle",
+    adoptionDate: "12/12/2021",
   },
   {
     id: "4",
@@ -60,6 +63,7 @@ const allAnimals = [
     favoriteFood: "Croquettes",
     favoritePlace: "Parc d'Auvers-sur-Oise",
     favoriteToy: "Balle",
+    adoptionDate: "12/12/2021",
   },
   {
     id: "5",
@@ -74,6 +78,7 @@ const allAnimals = [
     favoriteFood: "Croquettes",
     favoritePlace: "Parc d'Auvers-sur-Oise",
     favoriteToy: "Balle",
+    adoptionDate: "12/12/2021",
   },
   {
     id: "6",
@@ -88,6 +93,7 @@ const allAnimals = [
     favoriteFood: "Croquettes",
     favoritePlace: "Parc d'Auvers-sur-Oise",
     favoriteToy: "Balle",
+    adoptionDate: "12/12/2021",
   },
 ];
 

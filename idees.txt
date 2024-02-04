@@ -1,1 +1,2 @@
 Au dessus de la navbar sur la page d'accueil une vidéo de petits animaux qui marchent sur la navbar
+Ajouter des oiseaux
