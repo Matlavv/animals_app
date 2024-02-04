@@ -34,7 +34,6 @@ const LoginForm = () => {
     if (!validateInputs()) return;
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigation.navigate("UserProfile");
     } catch (error) {
       if (
         error.code === "auth/user-not-found" ||
