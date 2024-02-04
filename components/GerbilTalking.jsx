@@ -6,7 +6,7 @@ import { gerbil } from "../assets";
 const GerbilTalking = () => {
   const [isTextVisible, setTextVisible] = useState(false);
   const [animatedText, setAnimatedText] = useState("");
-  const message = "Bonjour ! Comment vas-tu ?";
+  const message = "Bonjour ! Comment vas-tu ? Méline le caca boudin !";
   const intervalIdRef = useRef(null);
 
   // Utiliser Animated.Value pour la position initiale (0 signifie pas de déplacement)

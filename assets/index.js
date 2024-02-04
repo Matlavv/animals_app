@@ -1,3 +1,4 @@
+import animalFeeding from "./animals/animalFeeding.png";
 import catFace from "./animals/catFace.png";
 import dog from "./animals/dog.png";
 import dogFace from "./animals/dogFace.png";
@@ -10,6 +11,7 @@ import logo from "./logo/logo.png";
 import logoTransparent from "./logo/logo_transparent.png";
 
 export {
+  animalFeeding,
   catFace,
   dog,
   dogFace,

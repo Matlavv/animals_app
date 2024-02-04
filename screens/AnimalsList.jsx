@@ -41,6 +41,7 @@ const categories = [
 
 const AnimalsList = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
+
   return (
     <SafeAreaView style={tw`flex-1`}>
       <ScrollView contentContainerStyle={tw`p-5`}>
