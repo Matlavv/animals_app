@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { signOut } from "firebase/auth";
-import React from "react";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   SafeAreaView,
@@ -13,23 +13,41 @@ import {
 import tw from "twrnc";
 import { giraffe } from "../assets";
 import ExperienceCircle from "../components/ExperienceCircle";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 
 const UserProfile = () => {
+  const [username, setUsername] = useState("");
+  const [age, setAge] = useState("");
+  const [funAnimal, setFunAnimal] = useState("");
+  const [playerAnimal, setPlayerAnimal] = useState("");
+  const [annoyingAnimal, setAnnoyingAnimal] = useState("");
+
   const navigation = useNavigation();
 
   const navigateToSettingsScreen = () => {
     navigation.navigate("Settings");
   };
 
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      navigation.navigate("LoginForm");
-    } catch (error) {
-      console.error("Erreur de déconnexion :", error);
-    }
-  };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          setUsername(userSnap.data().username);
+          setAge(userSnap.data().age);
+          setFunAnimal(userSnap.data().funAnimal);
+          setPlayerAnimal(userSnap.data().playerAnimal);
+          setAnnoyingAnimal(userSnap.data().annoyingAnimal);
+        } else {
+          console.log("Aucun document trouvé pour cet utilisateur.");
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <SafeAreaView style={tw`flex-1 bg-[#FFE5E4]`}>
@@ -70,9 +88,9 @@ const UserProfile = () => {
           </View>
           <View style={tw`mt-5 w-98 bg-white rounded-3xl h-170 mb-3`}>
             <View style={tw`flex items-center mt-5`}>
-              <Text style={tw`font-bold text-xl`}>Username</Text>
+              <Text style={tw`font-bold text-3xl`}>{username}</Text>
             </View>
-            <View style={tw`flex items-center mt-5`}>
+            <View style={tw`flex items-center mt-3`}>
               <View style={tw`flex-row mt-5`}>
                 <View
                   style={tw`flex items-center justify-center bg-[#FFE5E4] h-25 w-25 rounded-2xl`}
@@ -83,7 +101,7 @@ const UserProfile = () => {
                 <View
                   style={tw`flex items-center justify-center bg-[#F0FFF0] h-25 w-25 rounded-2xl ml-5`}
                 >
-                  <Text style={tw`text-xl text-black font-bold`}>9</Text>
+                  <Text style={tw`text-xl text-black font-bold`}>{age}</Text>
                   <Text style={tw`text-base text-gray-500`}>Ans</Text>
                 </View>
                 <View
@@ -104,7 +122,10 @@ const UserProfile = () => {
                     ]}
                   >
                     Ton animal le plus joueur est :
-                    <Text style={tw`font-bold items-center`}> Rex !</Text>
+                    <Text style={tw`font-bold items-center`}>
+                      {" "}
+                      {playerAnimal} !
+                    </Text>
                   </Text>
                 </View>
                 <View style={tw`flex bg-white rounded-2xl px-1 w-80 mt-2`}>
@@ -115,7 +136,10 @@ const UserProfile = () => {
                     ]}
                   >
                     Ton animal le plus rigolo est :
-                    <Text style={tw`font-bold items-center`}> Rex !</Text>
+                    <Text style={tw`font-bold items-center`}>
+                      {" "}
+                      {funAnimal} !
+                    </Text>
                   </Text>
                 </View>
                 <View style={tw`flex bg-white rounded-2xl px-1 w-80 mt-2 mb-2`}>
@@ -126,7 +150,10 @@ const UserProfile = () => {
                     ]}
                   >
                     Ton animal le plus embêtant est :
-                    <Text style={tw`font-bold items-center`}> Rex !</Text>
+                    <Text style={tw`font-bold items-center`}>
+                      {" "}
+                      {annoyingAnimal} !
+                    </Text>
                   </Text>
                 </View>
               </View>

@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { signOut } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -26,6 +26,30 @@ const SettingsScreen = () => {
   const [funAnimal, setFunAnimal] = useState("");
   const [playerAnimal, setPlayerAnimal] = useState("");
   const [annoyingAnimal, setAnnoyingAnimal] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!auth.currentUser) return;
+
+      const userDocRef = doc(db, "users", auth.currentUser.uid);
+      const docSnap = await getDoc(userDocRef);
+
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        setUsername(userData.username || "");
+        setAge(userData.age || "");
+        setGender(userData.gender || "");
+        setFavoriteAnimal(userData.favoriteAnimal || "");
+        setFunAnimal(userData.funAnimal || "");
+        setPlayerAnimal(userData.playerAnimal || "");
+        setAnnoyingAnimal(userData.annoyingAnimal || "");
+      } else {
+        console.log("Aucune donnée trouvée pour cet utilisateur!");
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleSubmit = async () => {
     const userDocRef = doc(db, "users", auth.currentUser.uid);
