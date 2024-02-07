@@ -34,16 +34,26 @@ const UserProfile = () => {
   return (
     <SafeAreaView style={tw`flex-1 bg-[#FFE5E4]`}>
       <ScrollView>
-        <View style={tw`flex items-end p-5`}>
+        <View style={tw`flex-row items-center justify-between p-5 mt-5`}>
+          <View style={tw`w-10`} />
+          {/* Conteneur pour le titre centré */}
+          <View>
+            <Text
+              style={[tw`text-3xl`, { fontFamily: "AutourOne_400Regular" }]}
+            >
+              Animalzz
+            </Text>
+          </View>
+          {/* Conteneur pour l'icône des paramètres, placée à droite */}
           <TouchableOpacity
-            style={tw`m-3 mt-7 rounded-md bg-white p-2`}
+            style={tw`rounded-md bg-white p-2`}
             onPress={navigateToSettingsScreen}
           >
             <Ionicons name={"settings-outline"} size={25} color="black" />
           </TouchableOpacity>
         </View>
         {/* Profile pic */}
-        <View style={tw`flex items-center justify-center`}>
+        <View style={tw`flex items-center justify-center mt-3`}>
           <View>
             <Image
               source={giraffe}
@@ -80,7 +90,7 @@ const UserProfile = () => {
                   style={tw`flex items-center justify-center bg-[#D2EBFE] h-25 w-25 rounded-2xl ml-5`}
                 >
                   <Text style={tw`text-xl text-black font-bold`}>10</Text>
-                  <Text style={tw`text-base text-gray-500`}>Poids</Text>
+                  <Text style={tw`text-base text-gray-500`}>Badges</Text>
                 </View>
               </View>
               <View
