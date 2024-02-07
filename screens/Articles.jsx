@@ -37,7 +37,7 @@ const categories = [
 ];
 
 const Articles = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Tout");
 
   return (
     <SafeAreaView style={tw`flex-1`}>

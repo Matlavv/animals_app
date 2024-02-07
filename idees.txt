@@ -2,3 +2,6 @@ Au dessus de la navbar sur la page d'accueil une vidéo de petits animaux qui ma
 Ajouter des oiseaux
 
 //TODO style des formulaires
+
+
+table users : level, animalPlayer, animalFun, animalBother, username, age, animalsNumber, profilePic, experiencePoint
