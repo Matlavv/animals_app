@@ -56,7 +56,9 @@ const AnimalDetails = () => {
             <View
               style={tw`flex items-center justify-center bg-[#FFE5E4] h-25 w-25 rounded-2xl ml-5`}
             >
-              <Text style={tw`text-xl text-black font-bold`}>{animal.sex}</Text>
+              <Text style={tw`text-xl text-black font-bold`}>
+                {animal.selected}
+              </Text>
               <Text style={tw`text-base text-gray-500`}>Sexe</Text>
             </View>
             <View
@@ -84,7 +86,7 @@ const AnimalDetails = () => {
             { fontFamily: "Alata_400Regular" },
           ]}
         >
-          {animal.details}
+          {animal.description}
         </Text>
         {/* Additionnals informations */}
         <View style={tw`flex items-center mt-3`}>

@@ -2,104 +2,11 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
-import { catFace, dog } from "../assets";
 
-const allAnimals = [
-  {
-    id: "1",
-    name: "Luna",
-    category: "Chats",
-    image: catFace,
-    sex: "Femelle",
-    age: "2 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "2",
-    name: "Rex",
-    category: "Chiens",
-    image: dog,
-    sex: "Male",
-    age: "1 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "3",
-    name: "pipou",
-    category: "Chiens",
-    image: dog,
-    sex: "Femelle",
-    age: "2 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "4",
-    name: "poopopp",
-    category: "Chiens",
-    image: dog,
-    sex: "Male",
-    age: "1 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "5",
-    name: "poopopp",
-    category: "Chiens",
-    image: dog,
-    sex: "Femelle",
-    age: "2 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "6",
-    name: "poopopp",
-    category: "Chats",
-    image: catFace,
-    sex: "Male",
-    age: "1 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-];
-
-const MyAnimals = ({ selectedCategory }) => {
+const MyAnimals = ({ selectedCategory, animals }) => {
   const navigation = useNavigation();
-  const filteredAnimals = allAnimals.filter(
+
+  const filteredAnimals = animals.filter(
     (animal) => animal.category === selectedCategory
   );
 

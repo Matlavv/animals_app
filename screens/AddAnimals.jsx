@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import tw from "twrnc";
 import { dog } from "../assets";
+import ChooseDogImageModal from "../components/Modals/ChooseDogImageModal";
 import { auth, db } from "../firebaseConfig";
 
 const AddAnimals = () => {
@@ -29,6 +30,8 @@ const AddAnimals = () => {
   const [favoritePlace, setFavoritePlace] = useState("");
   const [favoriteToy, setFavoriteToy] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedImage, setSelectedImage] = useState(dog);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
@@ -59,7 +62,8 @@ const AddAnimals = () => {
           description,
         });
         Alert.alert(
-          "Animal ajouté avec succès ! Il devrais apparaitre dans tes animaux !"
+          "Animal ajouté avec succès ! ",
+          "Il devrais apparaitre dans tes animaux !"
         );
       } catch (error) {
         Alert.alert("Erreur lors de l'ajout de l'animal !");
@@ -68,6 +72,9 @@ const AddAnimals = () => {
       Alert.alert("Penses à remplir tout les champs !");
     }
   };
+
+  const openModal = () => setIsModalVisible(true);
+  const closeModal = () => setIsModalVisible(false);
 
   return (
     <SafeAreaView style={tw`flex-1`}>
@@ -83,7 +90,13 @@ const AddAnimals = () => {
         </View>
         {/* Animal 3D */}
         <View style={tw`flex items-center justify-center`}>
-          <Image source={dog} style={tw`h-45 w-45`} />
+          <Image source={selectedImage} style={tw`h-45 w-45`} />
+          <TouchableOpacity
+            style={tw`rounded-md bg-white p-2`}
+            onPress={openModal}
+          >
+            <Ionicons name={"settings-outline"} size={25} color="black" />
+          </TouchableOpacity>
         </View>
         {/* White space with animal info */}
         <View style={tw`flex bg-[#F9F9F9] h-full rounded-t-20`}>
@@ -238,6 +251,14 @@ const AddAnimals = () => {
             </TouchableOpacity>
           </View>
         </View>
+        <ChooseDogImageModal
+          visible={isModalVisible}
+          onSelectImage={(image) => {
+            setSelectedImage(image);
+            closeModal();
+          }}
+          onClose={closeModal}
+        />
       </ScrollView>
     </SafeAreaView>
   );

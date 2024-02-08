@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { collection, getDocs, query } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   SafeAreaView,
@@ -10,6 +11,7 @@ import {
 import tw from "twrnc";
 import { catFace, dogFace, fishFace, hamsterFace, snakeFace } from "../assets";
 import MyAnimals from "../components/MyAnimals";
+import { auth, db } from "../firebaseConfig";
 
 const categories = [
   {
@@ -41,6 +43,33 @@ const categories = [
 
 const AnimalsList = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [animals, setAnimals] = useState([]);
+
+  useEffect(() => {
+    const fetchAnimalsData = async () => {
+      if (!auth.currentUser) return;
+
+      try {
+        const q = query(
+          collection(db, "users", auth.currentUser.uid, "animals")
+        );
+        const querySnapshot = await getDocs(q);
+        const animalsList = [];
+        querySnapshot.forEach((doc) => {
+          animalsList.push({ id: doc.id, ...doc.data() });
+        });
+        setAnimals(animalsList);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des animaux:", error);
+      }
+    };
+
+    fetchAnimalsData();
+  }, [selectedCategory]);
+
+  const filteredAnimals = animals.filter(
+    (animal) => animal.category === selectedCategory
+  );
 
   return (
     <SafeAreaView style={tw`flex-1`}>
@@ -66,7 +95,7 @@ const AnimalsList = () => {
               key={item.id}
               style={tw`mr-4 p-1 pb-5 rounded-full border border-gray-200 ${
                 selectedCategory === item.name ? "bg-[#D03312]" : "bg-white"
-              }`} // Changement de couleur basé sur la sélection
+              }`}
               onPress={() => setSelectedCategory(item.name)}
             >
               <Image
@@ -77,7 +106,7 @@ const AnimalsList = () => {
                 style={[
                   tw`text-center text-xs ${
                     selectedCategory === item.name ? "text-white" : "text-black"
-                  }`, // Changement de couleur du texte
+                  }`,
                   { fontFamily: "Alata_400Regular" },
                 ]}
               >
@@ -86,7 +115,10 @@ const AnimalsList = () => {
             </TouchableOpacity>
           ))}
         </ScrollView>
-        <MyAnimals selectedCategory={selectedCategory} />
+        <MyAnimals
+          selectedCategory={selectedCategory}
+          animals={filteredAnimals}
+        />
       </ScrollView>
     </SafeAreaView>
   );
