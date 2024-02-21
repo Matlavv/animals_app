@@ -14,7 +14,16 @@ import {
   View,
 } from "react-native";
 import tw from "twrnc";
-import { dog } from "../assets";
+import {
+  catFace,
+  dog,
+  dogFace,
+  fishFace,
+  gerbil,
+  hamsterFace,
+  hasmter,
+  snakeFace,
+} from "../assets";
 import ChooseDogImageModal from "../components/Modals/ChooseDogImageModal";
 import { auth, db } from "../firebaseConfig";
 
@@ -30,8 +39,28 @@ const AddAnimals = () => {
   const [favoritePlace, setFavoritePlace] = useState("");
   const [favoriteToy, setFavoriteToy] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedImage, setSelectedImage] = useState(dog);
+  const [selectedImage, setSelectedImage] = useState("dog");
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const imageMap = {
+    dog,
+    dogFace,
+    catFace,
+    fishFace,
+    gerbil,
+    hamsterFace,
+    hasmter,
+    snakeFace,
+  };
+
+  const handleSelectImage = (imageName) => {
+    setSelectedImage(imageName);
+  };
+
+  const renderImage = () => {
+    const imageSource = imageMap[selectedImage];
+    return <Image source={imageSource} style={tw`h-45 w-45`} />;
+  };
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
@@ -48,7 +77,6 @@ const AddAnimals = () => {
       description
     ) {
       try {
-        // Add animal to the database
         await addDoc(collection(db, "users", user.uid, "animals"), {
           adoptionDate,
           category,
@@ -60,6 +88,7 @@ const AddAnimals = () => {
           favoritePlace,
           favoriteToy,
           description,
+          imageName: selectedImage,
         });
         Alert.alert(
           "Animal ajouté avec succès ! ",
@@ -89,15 +118,18 @@ const AddAnimals = () => {
           </TouchableOpacity>
         </View>
         {/* Animal 3D */}
-        <View style={tw`flex items-center justify-center`}>
-          <Image source={selectedImage} style={tw`h-45 w-45`} />
-          <TouchableOpacity
-            style={tw`rounded-md bg-white p-2`}
-            onPress={openModal}
-          >
-            <Ionicons name={"settings-outline"} size={25} color="black" />
-          </TouchableOpacity>
+        <View style={tw`relative`}>
+          <View style={tw`flex items-center justify-center`}>
+            {renderImage()}
+            <TouchableOpacity
+              style={tw`absolute bottom-0 left-65 rounded-full bg-white p-2`}
+              onPress={openModal}
+            >
+              <Ionicons name={"pencil-outline"} size={20} color="black" />
+            </TouchableOpacity>
+          </View>
         </View>
+
         {/* White space with animal info */}
         <View style={tw`flex bg-[#F9F9F9] h-full rounded-t-20`}>
           <View style={tw`flex items-center justify-between p-5`}>

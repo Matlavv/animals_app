@@ -1,16 +1,57 @@
 import React from "react";
 import { Image, Modal, ScrollView, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
-import { dog, dogFace } from "../../assets";
+import {
+  catFace,
+  dog,
+  dogFace,
+  fishFace,
+  gerbil,
+  hamsterFace,
+  hasmter,
+  snakeFace,
+} from "../../assets";
 
 const images = [
   {
     id: 1,
     image: dog,
+    name: "dog",
   },
   {
     id: 2,
     image: dogFace,
+    name: "dogFace",
+  },
+  {
+    id: 3,
+    image: catFace,
+    name: "catFace",
+  },
+  {
+    id: 4,
+    image: fishFace,
+    name: "fishFace",
+  },
+  {
+    id: 5,
+    image: gerbil,
+    name: "gerbil",
+  },
+  {
+    id: 6,
+    image: hamsterFace,
+    name: "hamsterFace",
+  },
+  {
+    id: 7,
+    image: hasmter,
+    name: "hasmter",
+  },
+  {
+    id: 8,
+    image: snakeFace,
+    name: "snakeFace",
   },
 ];
 
@@ -30,7 +71,7 @@ const ChooseDogImageModal = ({ onSelectImage, visible, onClose }) => {
               <TouchableOpacity
                 key={item.id}
                 onPress={() => {
-                  onSelectImage(item.image);
+                  onSelectImage(item.name);
                   onClose();
                 }}
                 style={tw`mr-4`}

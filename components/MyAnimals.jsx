@@ -2,6 +2,16 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
+import {
+  catFace,
+  dog,
+  dogFace,
+  fishFace,
+  gerbil,
+  hamsterFace,
+  hasmter,
+  snakeFace,
+} from "../assets";
 
 const MyAnimals = ({ selectedCategory, animals }) => {
   const navigation = useNavigation();
@@ -22,6 +32,29 @@ const MyAnimals = ({ selectedCategory, animals }) => {
 
   const backgroundColor = isEven ? "#FFE5E4" : "#D2EBFE";
 
+  const getImageFromName = (imageName) => {
+    switch (imageName) {
+      case "dog":
+        return dog;
+      case "dogFace":
+        return dogFace;
+      case "catFace":
+        return catFace;
+      case "fishFace":
+        return fishFace;
+      case "gerbil":
+        return gerbil;
+      case "hamsterFace":
+        return hamsterFace;
+      case "hasmter":
+        return hasmter;
+      case "snakeFace":
+        return snakeFace;
+      default:
+        return dog;
+    }
+  };
+
   return (
     <View style={tw`mt-10`}>
       <View style={tw`flex-row flex-wrap`}>
@@ -40,7 +73,7 @@ const MyAnimals = ({ selectedCategory, animals }) => {
                   ]}
                 >
                   <Image
-                    source={animal.image}
+                    source={getImageFromName(animal.imageName)}
                     style={tw`w-36 h-36 rounded-xl`}
                   />
                 </TouchableOpacity>

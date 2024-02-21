@@ -112,18 +112,20 @@ const SettingsScreen = () => {
         >
           Dis nous en plus sur toi !
         </Text>
-        <View style={tw`flex p-5 mt-3`}>
+        <View style={tw`flex items-center mt-3`}>
           <View style={tw``}>
+            <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>Ton prénom</Text>
             <TextInput
-              style={tw`border border-gray-200 font-bold text-base rounded-xl bg-white p-2 mb-4 shadow-md w-50`}
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
               placeholder="Quel est ton prénom ?"
               value={username}
               onChangeText={(text) => setUsername(text)}
             />
           </View>
-          <View style={tw`items-end`}>
+          <View style={tw``}>
+          <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>Ton âge</Text>
             <TextInput
-              style={tw`border border-gray-200 font-bold text-base rounded-xl bg-white p-2 mb-4 shadow-md w-50`}
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
               placeholder="Quel est ton âge ?"
               keyboardType="numeric"
               value={age}
@@ -131,40 +133,45 @@ const SettingsScreen = () => {
             />
           </View>
           <View style={tw``}>
+          <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>Est-tu une fille ou un garçon</Text>
             <TextInput
-              style={tw`border border-gray-200 font-bold text-base rounded-xl bg-white p-2 mb-4 shadow-md w-60`}
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
               placeholder="Est-tu une fille ou garcon ?"
               value={gender}
               onChangeText={(text) => setGender(text)}
             />
           </View>
-          <View style={tw`items-end`}>
+          <View style={tw``}>
+          <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>Ton animal préféré</Text>
             <TextInput
-              style={tw`border border-gray-200 font-bold text-base rounded-xl bg-white p-2 mb-4 shadow-md w-60`}
-              placeholder="Quel est ton animal preféré ?"
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
+              placeholder="Quel est ton animal préféré ?"
               value={favoriteAnimal}
               onChangeText={(text) => setFavoriteAnimal(text)}
             />
           </View>
           <View style={tw``}>
+          <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>Ton animal le plus joueur</Text>
             <TextInput
-              style={tw`border border-gray-200 font-bold text-base rounded-xl bg-white p-2 mb-4 shadow-md w-70`}
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
               placeholder="Quel est ton animal le plus joueur ?"
               value={playerAnimal}
               onChangeText={(text) => setPlayerAnimal(text)}
             />
           </View>
-          <View style={tw`items-end`}>
+          <View style={tw``}>
+          <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>Ton animal le plus rigolo</Text>
             <TextInput
-              style={tw`border border-gray-200 font-bold text-base rounded-xl bg-white p-2 mb-4 shadow-md w-70`}
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
               placeholder="Quel est ton animal le plus rigolo ?"
               value={funAnimal}
               onChangeText={(text) => setFunAnimal(text)}
             />
           </View>
           <View style={tw``}>
+          <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>Ton animal le plus embêtant</Text>
             <TextInput
-              style={tw`border border-gray-200 font-bold text-base rounded-xl bg-white p-2 mb-4 shadow-md w-80`}
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
               placeholder="Quel est ton animal le plus embêtant ?"
               value={annoyingAnimal}
               onChangeText={(text) => setAnnoyingAnimal(text)}
@@ -188,7 +195,7 @@ const SettingsScreen = () => {
         </View>
         <View style={tw`flex items-center mt-5`}>
           <TouchableOpacity
-            style={tw`items-center`}
+            style={tw`items-center mb-5`}
             onPress={() => handleSignOut()}
           >
             <Text

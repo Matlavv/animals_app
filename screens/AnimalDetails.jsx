@@ -3,6 +3,16 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
+import {
+  catFace,
+  dog,
+  dogFace,
+  fishFace,
+  gerbil,
+  hamsterFace,
+  hasmter,
+  snakeFace,
+} from "../assets";
 
 const AnimalDetails = () => {
   const navigation = useNavigation();
@@ -15,6 +25,29 @@ const AnimalDetails = () => {
 
   const navigateToUpdateAnimalForm = () => {
     navigation.navigate("UpdateAnimalForm", { animal: animal });
+  };
+
+  const getImageFromName = (imageName) => {
+    switch (imageName) {
+      case "dog":
+        return dog;
+      case "dogFace":
+        return dogFace;
+      case "catFace":
+        return catFace;
+      case "fishFace":
+        return fishFace;
+      case "gerbil":
+        return gerbil;
+      case "hamsterFace":
+        return hamsterFace;
+      case "hasmter":
+        return hasmter;
+      case "snakeFace":
+        return snakeFace;
+      default:
+        return dog;
+    }
   };
 
   return (
@@ -36,7 +69,10 @@ const AnimalDetails = () => {
       </View>
       {/* Animal 3D */}
       <View style={tw`flex items-center justify-center`}>
-        <Image source={animal.image} style={tw`h-45 w-45`} />
+        <Image
+          source={getImageFromName(animal.imageName)}
+          style={tw`h-45 w-45`}
+        />
       </View>
       {/* White space with animal info */}
       <View style={tw`flex bg-[#F9F9F9] h-full rounded-t-20`}>
