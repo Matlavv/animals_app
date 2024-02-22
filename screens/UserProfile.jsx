@@ -11,7 +11,7 @@ import {
   View,
 } from "react-native";
 import tw from "twrnc";
-import { giraffe } from "../assets";
+import { giraffe, redPaw } from "../assets";
 import ExperienceCircle from "../components/ExperienceCircle";
 import { auth, db } from "../firebaseConfig";
 
@@ -73,6 +73,14 @@ const UserProfile = () => {
         </View>
         {/* Profile pic */}
         <View style={tw`flex items-center justify-center mt-3`}>
+          <Image
+            source={redPaw}
+            style={[
+              tw`absolute`,
+              { left: -30, top: -20, width: 137, height: 130, opacity: 0.4 },
+              { transform: [{ rotate: "40deg" }] },
+            ]}
+          />
           <View>
             <Image
               source={giraffe}
@@ -106,15 +114,43 @@ const UserProfile = () => {
                   <Text style={tw`text-base text-gray-500`}>Ans</Text>
                 </View>
                 <View
-                  style={tw`flex items-center justify-center bg-[#D2EBFE] h-25 w-25 rounded-2xl ml-5`}
+                  style={tw`flex items-center justify-center overflow-hidden bg-[#D2EBFE] h-25 w-25 rounded-2xl ml-5`}
                 >
+                  <Image
+                    source={redPaw}
+                    style={[
+                      tw`absolute`,
+                      {
+                        right: -5,
+                        bottom: -10,
+                        width: 65,
+                        height: 60,
+                        opacity: 0.2,
+                      },
+                      { transform: [{ rotate: "-40deg" }] },
+                    ]}
+                  />
                   <Text style={tw`text-xl text-black font-bold`}>10</Text>
                   <Text style={tw`text-base text-gray-500`}>Badges</Text>
                 </View>
               </View>
               <View
-                style={tw`flex w-90 bg-[#FFE5E4] rounded-2xl mt-5 items-center`}
+                style={tw`flex w-90 bg-[#FFE5E4] rounded-2xl mt-5 items-center overflow-hidden`}
               >
+                <Image
+                  source={redPaw}
+                  style={[
+                    tw`absolute`,
+                    {
+                      left: -40,
+                      bottom: -40,
+                      width: 235,
+                      height: 230,
+                      opacity: 0.4,
+                    },
+                    { transform: [{ rotate: "40deg" }] },
+                  ]}
+                />
                 <View style={tw`flex bg-white rounded-2xl px-1 w-80 mt-2`}>
                   <Text
                     style={[
