@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Image,
   SafeAreaView,
@@ -28,26 +28,27 @@ const UserProfile = () => {
     navigation.navigate("Settings");
   };
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-          setUsername(userSnap.data().username);
-          setAge(userSnap.data().age);
-          setFunAnimal(userSnap.data().funAnimal);
-          setPlayerAnimal(userSnap.data().playerAnimal);
-          setAnnoyingAnimal(userSnap.data().annoyingAnimal);
-        } else {
-          console.log("Aucun document trouvé pour cet utilisateur.");
-        }
+  const fetchUserData = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        setUsername(userSnap.data().username);
+        setAge(userSnap.data().age);
+        setFunAnimal(userSnap.data().funAnimal);
+        setPlayerAnimal(userSnap.data().playerAnimal);
+        setAnnoyingAnimal(userSnap.data().annoyingAnimal);
+      } else {
+        console.log("Aucun document trouvé pour cet utilisateur.");
       }
-    };
-
-    fetchUserData();
-  }, []);
+    }
+  };
+  useFocusEffect(
+    useCallback(() => {
+      fetchUserData();
+    }, [])
+  );
 
   return (
     <SafeAreaView style={tw`flex-1 bg-[#FFE5E4]`}>

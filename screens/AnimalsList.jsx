@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import {
   Image,
@@ -46,25 +46,25 @@ const AnimalsList = () => {
   const [animals, setAnimals] = useState([]);
 
   useEffect(() => {
-    const fetchAnimalsData = async () => {
-      if (!auth.currentUser) return;
+    if (!auth.currentUser) return;
 
-      try {
-        const q = query(
-          collection(db, "users", auth.currentUser.uid, "animals")
-        );
-        const querySnapshot = await getDocs(q);
+    const q = query(collection(db, "users", auth.currentUser.uid, "animals"));
+
+    // S'abonner aux mises à jour en temps réel
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
         const animalsList = [];
         querySnapshot.forEach((doc) => {
           animalsList.push({ id: doc.id, ...doc.data() });
         });
         setAnimals(animalsList);
-      } catch (error) {
+      },
+      (error) => {
         console.error("Erreur lors de la récupération des animaux:", error);
       }
-    };
-
-    fetchAnimalsData();
+    );
+    return () => unsubscribe();
   }, [selectedCategory]);
 
   const filteredAnimals = animals.filter(
