@@ -1,14 +1,27 @@
+import { useNavigation } from "@react-navigation/native";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import tw from "twrnc";
 import { giraffe } from "../assets";
-import GerbilTalking from "../components/GerbilTalking";
 import NavToAnimals from "../components/NavToAnimals";
+import SuggestedArticles from "../components/SuggestedArticles";
 import { auth, db } from "../firebaseConfig";
 
 const HomeScreen = () => {
   const [username, setUsername] = useState("");
+  const navigation = useNavigation();
+
+  const navigateToArticlesScreen = () => {
+    navigation.navigate("Articles");
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -64,8 +77,21 @@ const HomeScreen = () => {
         <View style={tw`flex items-center mt-5`}>
           <NavToAnimals />
         </View>
+        <View style={tw`flex-row justify-between items-center mt-6 mx-4`}>
+          <Text style={[tw`text-2xl`, { fontFamily: "Alata_400Regular" }]}>
+            Articles populaires
+          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigateToArticlesScreen();
+            }}
+          >
+            <Text style={tw`text-base`}>Tout voir</Text>
+          </TouchableOpacity>
+        </View>
+
         <View>
-          <GerbilTalking />
+          <SuggestedArticles />
         </View>
       </ScrollView>
     </SafeAreaView>
