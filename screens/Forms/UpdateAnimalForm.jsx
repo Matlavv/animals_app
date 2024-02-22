@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import {
   Alert,
@@ -78,6 +78,25 @@ const UpdateAnimalForm = () => {
     } catch (error) {
       console.error("Erreur lors de la mise à jour de l'animal", error);
       Alert.alert("Erreur", "Un problème est survenu lors de la mise à jour.");
+    }
+  };
+
+  const handleDelete = async () => {
+    const animalRef = doc(
+      db,
+      "users",
+      auth.currentUser.uid,
+      "animals",
+      animal.id
+    );
+
+    try {
+      await deleteDoc(animalRef);
+      Alert.alert("Succès", "L'animal a été supprimé.");
+      navigation.navigate("AnimalsList");
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'animal", error);
+      Alert.alert("Erreur", "Un problème est survenu lors de la suppression.");
     }
   };
 
@@ -220,6 +239,19 @@ const UpdateAnimalForm = () => {
               ]}
             >
               Valider les modifications
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={tw`mb-4 items-center p-3 rounded-lg w-5/6`}
+            onPress={handleDelete}
+          >
+            <Text
+              style={[
+                tw`flex text-base text-black`,
+                { fontFamily: "Alata_400Regular" },
+              ]}
+            >
+              Supprimer l'animal
             </Text>
           </TouchableOpacity>
         </View>
