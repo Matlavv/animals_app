@@ -1,7 +1,9 @@
 Au dessus de la navbar sur la page d'accueil une vidéo de petits animaux qui marchent sur la navbar
 Ajouter des oiseaux
 
-//TODO style des formulaires ajouter une image drole sous le form (enfant sur un cheval/panda...)
+Ajouter "paw" derrière pour le style
+
+//TODO style des formulaires ajouter une image drole sous le login form (enfant sur un cheval/panda...)
 
 
 table users : level, animalPlayer, animalFun, animalBother, username, age, animalsNumber, profilePic, experiencePoint

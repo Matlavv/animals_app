@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import {
   Alert,
+  Image,
   SafeAreaView,
   Text,
   TextInput,
@@ -10,6 +11,7 @@ import {
   View,
 } from "react-native";
 import tw from "twrnc";
+import { girlCat } from "../../assets";
 import { auth } from "../../firebaseConfig";
 
 const RegisterForm = () => {
@@ -37,10 +39,7 @@ const RegisterForm = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       navigation.navigate("LoginForm");
-      Alert.alert(
-        "Succès",
-        "Inscription réussie, vous pouvez maintenant vous connecter."
-      );
+      Alert.alert("Succès", "Inscription réussie !");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         Alert.alert(
@@ -54,19 +53,29 @@ const RegisterForm = () => {
   };
 
   return (
-    <SafeAreaView style={tw`p-4 flex-1 justify-center items-center mt-20`}>
-      <View>
-        <Text>Inscription</Text>
-        <View style={tw`p-4 flex justify-center items-center`}>
+    <SafeAreaView
+      style={tw`p-4 flex-1 justify-center items-center bg-[#FFE5E4]`}
+    >
+      <View style={tw`flex`}>
+        <View style={tw`flex justify-center items-center`}>
+          <Image source={girlCat} style={tw`w-60 h-60`} />
+        </View>
+        <View style={tw`flex justify-center items-center mt-3`}>
+          <Text style={tw`flex text-white font-bold text-xl`}>Bienvenue !</Text>
+          <Text style={tw`flex text-white font-bold text-3xl mt-3`}>
+            Merci de vous inscrire
+          </Text>
+        </View>
+        <View style={tw`p-4 flex justify-center items-center mt-5`}>
           <TextInput
-            style={tw`border-b w-80 p-2 mb-4`}
+            style={tw`w-80 p-4 mb-4 bg-white rounded-full shadow-2xl`}
             placeholder="Email"
             autoCapitalize="none"
             value={email}
             onChangeText={setEmail}
           />
           <TextInput
-            style={tw`border-b w-80 p-2 mb-4`}
+            style={tw`w-80 p-4 mb-4 bg-white rounded-full shadow-2xl mt-2`}
             placeholder="Password"
             autoCapitalize="none"
             secureTextEntry
@@ -75,17 +84,20 @@ const RegisterForm = () => {
           />
           <TouchableOpacity
             onPress={handleSignUp}
-            style={tw`bg-[#34469C] px-5 py-3 rounded-full flex mt-7 shadow-2xl`}
+            style={tw`w-80 bg-[#FF9391] px-5 py-4 rounded-full flex mt-7 shadow-2xl items-center`}
           >
-            <Text style={tw`text-white text-base`}>S'inscrire</Text>
+            <Text style={tw`text-white text-base font-semibold`}>
+              Inscription
+            </Text>
           </TouchableOpacity>
         </View>
-        <View style={tw`flex-row justify-center items-center mt-8`}>
-          <Text style={tw`text-black font-semibold text-sm`}>
-            Vous avez deja un compte ?
-          </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("LoginForm")}>
-            <Text style={tw`text-blue-500 ml-2 font-bold text-sm`}>
+        <View style={tw`flex justify-center items-center mt-8`}>
+          <Text style={tw`text-black font-semibold text-sm`}>OU</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LoginForm")}
+            style={tw`w-80 bg-[rgba(255,147,145,0.4)] px-5 py-4 rounded-full flex mt-7 shadow-2xl items-center`}
+          >
+            <Text style={tw`text-white text-base font-semibold`}>
               Se connecter
             </Text>
           </TouchableOpacity>
