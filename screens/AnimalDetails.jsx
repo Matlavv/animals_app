@@ -1,6 +1,11 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import React from "react";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useCallback } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
 import {
@@ -13,11 +18,12 @@ import {
   hasmter,
   snakeFace,
 } from "../assets";
+import { auth, db } from "../firebaseConfig";
 
 const AnimalDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { animal } = route.params;
+  let { animal } = route.params;
 
   const navigateToMedical = () => {
     navigation.navigate("Medical");
@@ -49,6 +55,29 @@ const AnimalDetails = () => {
         return dog;
     }
   };
+
+  const fetchAnimalDetails = async () => {
+    const animalRef = doc(
+      db,
+      "users",
+      auth.currentUser.uid,
+      "animals",
+      animal.id
+    );
+    const docSnap = await getDoc(animalRef);
+
+    if (docSnap.exists()) {
+      animal = { id: docSnap.id, ...docSnap.data() };
+    } else {
+      console.log("No such document!");
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchAnimalDetails();
+    }, [])
+  );
 
   return (
     <ScrollView style={tw`flex bg-[#FFE5E4] h-full`}>
