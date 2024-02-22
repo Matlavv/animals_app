@@ -16,6 +16,7 @@ import {
   gerbil,
   hamsterFace,
   hasmter,
+  redPaw,
   snakeFace,
 } from "../assets";
 import { auth, db } from "../firebaseConfig";
@@ -23,7 +24,7 @@ import { auth, db } from "../firebaseConfig";
 const AnimalDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  let { animal } = route.params;
+  let { animal, backgroundColor } = route.params;
 
   const navigateToMedical = () => {
     navigation.navigate("Medical");
@@ -80,7 +81,12 @@ const AnimalDetails = () => {
   );
 
   return (
-    <ScrollView style={tw`flex bg-[#FFE5E4] h-full`}>
+    <ScrollView
+      style={
+        (tw`flex h-full`,
+        { backgroundColor: backgroundColor, borderRadius: 20 })
+      }
+    >
       {/* header */}
       <View style={tw`flex-row items-center justify-between p-5`}>
         <TouchableOpacity
@@ -99,8 +105,24 @@ const AnimalDetails = () => {
       {/* Animal 3D */}
       <View style={tw`flex items-center justify-center`}>
         <Image
+          source={redPaw}
+          style={[
+            tw`absolute`,
+            { left: -30, top: -20, width: 157, height: 150, opacity: 0.4 },
+            { transform: [{ rotate: "40deg" }] },
+          ]}
+        />
+        <Image
           source={getImageFromName(animal.imageName)}
           style={tw`h-45 w-45`}
+        />
+        <Image
+          source={redPaw}
+          style={[
+            tw`absolute`,
+            { right: -30, bottom: -40, width: 157, height: 150, opacity: 0.4 },
+            { transform: [{ rotate: "-40deg" }] },
+          ]}
         />
       </View>
       {/* White space with animal info */}

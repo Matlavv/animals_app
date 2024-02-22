@@ -14,6 +14,7 @@ import snakeFace from "./animals/snakeFace.png";
 import girlFun from "./girl_fun.png";
 import logo from "./logo/logo.png";
 import logoTransparent from "./logo/logo_transparent.png";
+import redPaw from "./red_paw.png";
 
 export {
   animalFeeding,
@@ -31,5 +32,6 @@ export {
   hasmter,
   logo,
   logoTransparent,
+  redPaw,
   snakeFace,
 };

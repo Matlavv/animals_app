@@ -50,7 +50,6 @@ const AnimalsList = () => {
 
     const q = query(collection(db, "users", auth.currentUser.uid, "animals"));
 
-    // S'abonner aux mises à jour en temps réel
     const unsubscribe = onSnapshot(
       q,
       (querySnapshot) => {

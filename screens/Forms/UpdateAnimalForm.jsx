@@ -20,6 +20,7 @@ import {
   gerbil,
   hamsterFace,
   hasmter,
+  redPaw,
   snakeFace,
 } from "../../assets";
 import ChooseDogImageModal from "../../components/Modals/ChooseDogImageModal";
@@ -102,6 +103,14 @@ const UpdateAnimalForm = () => {
       {/* Animal 3D */}
       <View style={tw`relative`}>
         <View style={tw`flex items-center justify-center`}>
+          <Image
+            source={redPaw}
+            style={[
+              tw`absolute`,
+              { left: -30, top: -20, width: 157, height: 150, opacity: 0.4 },
+              { transform: [{ rotate: "40deg" }] },
+            ]}
+          />
           {renderImage()}
           <TouchableOpacity
             style={tw`absolute bottom-0 left-65 rounded-full bg-white p-2`}
@@ -109,6 +118,20 @@ const UpdateAnimalForm = () => {
           >
             <Ionicons name={"pencil-outline"} size={20} color="black" />
           </TouchableOpacity>
+          <Image
+            source={redPaw}
+            style={[
+              tw`absolute`,
+              {
+                right: -30,
+                bottom: -40,
+                width: 157,
+                height: 150,
+                opacity: 0.4,
+              },
+              { transform: [{ rotate: "-40deg" }] },
+            ]}
+          />
         </View>
       </View>
       {/* White space with animal info */}

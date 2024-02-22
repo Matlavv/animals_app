@@ -10,6 +10,7 @@ import {
   gerbil,
   hamsterFace,
   hasmter,
+  redPaw,
   snakeFace,
 } from "../assets";
 
@@ -26,8 +27,11 @@ const MyAnimals = ({ selectedCategory, animals }) => {
     navigation.navigate("AddAnimal");
   };
 
-  const navigateToAnimalDetails = (animal) => {
-    navigation.navigate("AnimalDetails", { animal: animal });
+  const navigateToAnimalDetails = (animal, backgroundColor) => {
+    navigation.navigate("AnimalDetails", {
+      animal: animal,
+      backgroundColor: backgroundColor,
+    });
   };
 
   const backgroundColor = isEven ? "#FFE5E4" : "#D2EBFE";
@@ -66,15 +70,30 @@ const MyAnimals = ({ selectedCategory, animals }) => {
             return (
               <View key={animal.id} style={tw`m-3`}>
                 <TouchableOpacity
-                  onPress={() => navigateToAnimalDetails(animal)}
+                  onPress={() =>
+                    navigateToAnimalDetails(animal, backgroundColor)
+                  }
                   style={[
                     tw`w-40 h-40 rounded-xl items-center justify-center`,
                     { backgroundColor: backgroundColor },
                   ]}
                 >
+                  <View
+                    style={tw`absolute w-full h-full justify-center items-center overflow-hidden`}
+                  >
+                    <Image
+                      source={redPaw}
+                      style={[
+                        tw`w-32 h-30 opacity-20 mt-20 ml-20`,
+                        { transform: [{ rotate: "-45deg" }] },
+                      ]}
+                      resizeMode="cover"
+                    />
+                  </View>
+                  {/* Image de l'animal */}
                   <Image
                     source={getImageFromName(animal.imageName)}
-                    style={tw`w-36 h-36 rounded-xl`}
+                    style={tw`w-36 h-36 rounded-xl z-10`}
                   />
                 </TouchableOpacity>
                 <Text
