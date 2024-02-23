@@ -94,6 +94,7 @@ const AddAnimals = () => {
           "Animal ajouté avec succès ! ",
           "Il devrais apparaitre dans tes animaux !"
         );
+        navigation.goBack();
       } catch (error) {
         Alert.alert("Erreur lors de l'ajout de l'animal !");
       }
@@ -125,7 +126,7 @@ const AddAnimals = () => {
               style={tw`absolute bottom-0 left-65 rounded-full bg-white p-2`}
               onPress={openModal}
             >
-              <Ionicons name={"pencil-outline"} size={20} color="black" />
+              <Ionicons name={"pencil-outline"} size={30} color="black" />
             </TouchableOpacity>
           </View>
         </View>
@@ -249,7 +250,7 @@ const AddAnimals = () => {
             <View style={tw`flex-row mt-5`}>
               <Text style={tw`text-base text-gray-700`}>Jouet preféré : </Text>
               <TextInput
-                placeholder="balle"
+                placeholder="Balle"
                 style={tw`border border-gray-300 rounded-xl px-2`}
                 value={favoriteToy}
                 onChangeText={setFavoriteToy}

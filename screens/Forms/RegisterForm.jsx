@@ -5,6 +5,7 @@ import {
   Alert,
   Image,
   SafeAreaView,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -56,7 +57,7 @@ const RegisterForm = () => {
     <SafeAreaView
       style={tw`p-4 flex-1 justify-center items-center bg-[#FFE5E4]`}
     >
-      <View style={tw`flex`}>
+      <ScrollView style={tw`flex`}>
         <View style={tw`flex justify-center items-center`}>
           <Image source={girlCat} style={tw`w-60 h-60`} />
         </View>
@@ -102,7 +103,7 @@ const RegisterForm = () => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
