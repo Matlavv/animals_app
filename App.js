@@ -7,7 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Keyboard } from "react-native";
 import { auth } from "./firebaseConfig";
-import Articles from "./screens/Articles";
+import ChatBot from "./screens/ChatBot";
 import HomeScreen from "./screens/HomeScreen";
 import AnimalsStack from "./screens/Stack/AnimalStack";
 import ProfileStack from "./screens/Stack/ProfileStack";
@@ -75,8 +75,10 @@ const App = () => {
                 iconName = focused ? "home" : "home-outline";
               } else if (route?.name === "Mes animaux") {
                 iconName = focused ? "paw" : "paw-outline";
-              } else if (route?.name === "Articles") {
-                iconName = focused ? "newspaper" : "newspaper-outline";
+              } else if (route?.name === "Chat") {
+                iconName = focused
+                  ? "chatbox-ellipses"
+                  : "chatbox-ellipses-outline";
               } else if (route?.name === "Profil") {
                 iconName = focused ? "person" : "person-outline";
               }
@@ -91,14 +93,14 @@ const App = () => {
                 elevation: 0,
                 shadowOpacity: 0,
               }),
-              display: keyboardVisible ? "none" : "flex", // Cacher la tabBar quand le clavier est visible
+              display: keyboardVisible ? "none" : "flex",
             },
             headerShown: false,
           })}
         >
           <Tab.Screen name="Accueil" component={HomeScreen} />
           <Tab.Screen name="Mes animaux" component={AnimalsStack} />
-          <Tab.Screen name="Articles" component={Articles} />
+          <Tab.Screen name="Chat" component={ChatBot} />
           <Tab.Screen name="Profil" component={ProfileStack} />
         </Tab.Navigator>
       ) : (
