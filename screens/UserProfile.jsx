@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useCallback, useState } from "react";
 import {
   Image,
@@ -21,6 +21,7 @@ const UserProfile = () => {
   const [funAnimal, setFunAnimal] = useState("");
   const [playerAnimal, setPlayerAnimal] = useState("");
   const [annoyingAnimal, setAnnoyingAnimal] = useState("");
+  const [animalCount, setAnimalCount] = useState(0);
 
   const navigation = useNavigation();
 
@@ -39,6 +40,10 @@ const UserProfile = () => {
         setFunAnimal(userSnap.data().funAnimal);
         setPlayerAnimal(userSnap.data().playerAnimal);
         setAnnoyingAnimal(userSnap.data().annoyingAnimal);
+
+        const animalsRef = collection(db, "users", user.uid, "animals");
+        const animalsSnap = await getDocs(animalsRef);
+        setAnimalCount(animalsSnap.docs.length);
       } else {
         console.log("Aucun document trouvé pour cet utilisateur.");
       }
@@ -104,7 +109,9 @@ const UserProfile = () => {
                 <View
                   style={tw`flex items-center justify-center bg-[#FFE5E4] h-25 w-25 rounded-2xl`}
                 >
-                  <Text style={tw`text-xl text-black font-bold`}>10</Text>
+                  <Text style={tw`text-xl text-black font-bold`}>
+                    {animalCount}
+                  </Text>
                   <Text style={tw`text-base text-gray-500`}>Animaux</Text>
                 </View>
                 <View

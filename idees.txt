@@ -1,8 +1,6 @@
 Au dessus de la navbar sur la page d'accueil une vidéo de petits animaux qui marchent sur la navbar
 Ajouter des oiseaux
 
-Modifier les infos dans UpdateAnimal
-
 table users : level, animalPlayer, animalFun, animalBother, username, age, animalsNumber, profilePic, experiencePoint
 
 Quiz sur comment bien s'occuper de ses animaux et gagner de l'xp

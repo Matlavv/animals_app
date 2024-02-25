@@ -39,6 +39,7 @@ const UpdateAnimalForm = () => {
   const [favoriteToy, setFavoriteToy] = useState(animal.favoriteToy);
   const [selectedImage, setSelectedImage] = useState(animal.imageName);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [description, setDescription] = useState(animal.description);
 
   const imageMap = {
     dog,
@@ -69,6 +70,7 @@ const UpdateAnimalForm = () => {
         favoritePlace,
         imageName: selectedImage,
         favoriteToy,
+        description,
       });
       Alert.alert(
         "Succès",
@@ -132,10 +134,10 @@ const UpdateAnimalForm = () => {
           />
           {renderImage()}
           <TouchableOpacity
-            style={tw`absolute bottom-0 left-65 rounded-full bg-white p-2`}
+            style={tw`absolute bottom-0 left-60 rounded-full bg-white p-2`}
             onPress={openModal}
           >
-            <Ionicons name={"pencil-outline"} size={20} color="black" />
+            <Ionicons name={"pencil-outline"} size={30} color="black" />
           </TouchableOpacity>
           <Image
             source={redPaw}
@@ -224,6 +226,17 @@ const UpdateAnimalForm = () => {
               placeholder="Son jouet préféré"
               value={favoriteToy}
               onChangeText={setFavoriteToy}
+            />
+          </View>
+          <View style={tw``}>
+            <Text style={tw`ml-1 mb-1 text-[#DEB7B6] font-bold`}>
+              Ses informations
+            </Text>
+            <TextInput
+              style={tw`border-2 border-[#FFE5E4] font-bold text-base rounded-3xl bg-white p-2 px-3 mb-4 shadow-md w-50`}
+              placeholder="Son jouet préféré"
+              value={description}
+              onChangeText={setDescription}
             />
           </View>
         </View>

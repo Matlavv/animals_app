@@ -123,7 +123,7 @@ const AddAnimals = () => {
           <View style={tw`flex items-center justify-center`}>
             {renderImage()}
             <TouchableOpacity
-              style={tw`absolute bottom-0 left-65 rounded-full bg-white p-2`}
+              style={tw`absolute bottom-0 left-60 rounded-full bg-white p-2`}
               onPress={openModal}
             >
               <Ionicons name={"pencil-outline"} size={30} color="black" />
