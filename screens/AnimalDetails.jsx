@@ -24,10 +24,11 @@ import { auth, db } from "../firebaseConfig";
 const AnimalDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const { animalId } = route.params;
   let { animal, backgroundColor } = route.params;
 
   const navigateToMedical = () => {
-    navigation.navigate("Medical");
+    navigation.navigate("Medical", { animalId });
   };
 
   const navigateToUpdateAnimalForm = () => {

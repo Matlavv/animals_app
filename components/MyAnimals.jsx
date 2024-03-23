@@ -29,7 +29,7 @@ const MyAnimals = ({ selectedCategory, animals }) => {
 
   const navigateToAnimalDetails = (animal, backgroundColor) => {
     navigation.navigate("AnimalDetails", {
-      animal: animal,
+      animalId: animal.id,
       backgroundColor: backgroundColor,
     });
   };
