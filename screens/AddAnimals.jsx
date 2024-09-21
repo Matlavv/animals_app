@@ -1,8 +1,8 @@
-import { Ionicons } from "@expo/vector-icons";
-import { Picker } from "@react-native-picker/picker";
-import { useNavigation } from "@react-navigation/native";
-import { addDoc, collection } from "firebase/firestore";
-import React, { useState } from "react";
+import { Ionicons } from '@expo/vector-icons';
+import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native';
+import { addDoc, collection } from 'firebase/firestore';
+import React, { useState } from 'react';
 import {
   Alert,
   Image,
@@ -12,8 +12,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
-import tw from "twrnc";
+} from 'react-native';
+import tw from 'twrnc';
 import {
   catFace,
   dog,
@@ -23,23 +23,23 @@ import {
   hamsterFace,
   hasmter,
   snakeFace,
-} from "../assets";
-import ChooseDogImageModal from "../components/Modals/ChooseDogImageModal";
-import { auth, db } from "../firebaseConfig";
+} from '../assets';
+import ChooseDogImageModal from '../components/Modals/ChooseDogImageModal';
+import { auth, db } from '../firebaseConfig';
 
 const AddAnimals = () => {
   const navigation = useNavigation();
-  const [selected, setSelected] = useState("Mâle");
-  const [category, setCategory] = useState("Chiens");
-  const [adoptionDate, setAdoptionDate] = useState("");
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  const [favoriteFood, setFavoriteFood] = useState("");
-  const [favoritePlace, setFavoritePlace] = useState("");
-  const [favoriteToy, setFavoriteToy] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectedImage, setSelectedImage] = useState("dog");
+  const [selected, setSelected] = useState('Mâle');
+  const [category, setCategory] = useState('Chiens');
+  const [adoptionDate, setAdoptionDate] = useState('');
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [weight, setWeight] = useState('');
+  const [favoriteFood, setFavoriteFood] = useState('');
+  const [favoritePlace, setFavoritePlace] = useState('');
+  const [favoriteToy, setFavoriteToy] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedImage, setSelectedImage] = useState('dog');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const imageMap = {
@@ -77,7 +77,7 @@ const AddAnimals = () => {
       description
     ) {
       try {
-        await addDoc(collection(db, "users", user.uid, "animals"), {
+        await addDoc(collection(db, 'users', user.uid, 'animals'), {
           adoptionDate,
           category,
           name,
@@ -91,15 +91,15 @@ const AddAnimals = () => {
           imageName: selectedImage,
         });
         Alert.alert(
-          "Animal ajouté avec succès ! ",
-          "Il devrais apparaitre dans tes animaux !"
+          'Animal ajouté avec succès ! ',
+          'Il devrais apparaitre dans tes animaux !',
         );
         navigation.goBack();
       } catch (error) {
         Alert.alert("Erreur lors de l'ajout de l'animal !");
       }
     } else {
-      Alert.alert("Penses à remplir tout les champs !");
+      Alert.alert('Penses à remplir tout les champs !');
     }
   };
 
@@ -115,7 +115,7 @@ const AddAnimals = () => {
             onPress={() => navigation.goBack()}
             style={tw`m-3 mt-7 rounded-md bg-white p-2`}
           >
-            <Ionicons name={"chevron-back"} size={25} color="black" />
+            <Ionicons name={'chevron-back'} size={25} color="black" />
           </TouchableOpacity>
         </View>
         {/* Animal 3D */}
@@ -126,7 +126,7 @@ const AddAnimals = () => {
               style={tw`absolute bottom-0 left-60 rounded-full bg-white p-2`}
               onPress={openModal}
             >
-              <Ionicons name={"pencil-outline"} size={30} color="black" />
+              <Ionicons name={'pencil-outline'} size={30} color="black" />
             </TouchableOpacity>
           </View>
         </View>
@@ -137,10 +137,10 @@ const AddAnimals = () => {
             <Text
               style={[
                 tw`text-2xl mt-2 items-center overflow-hidden text-center`,
-                { fontFamily: "Alata_400Regular" },
+                { fontFamily: 'Alata_400Regular' },
               ]}
             >
-              Dis nous en plus sur ton nouvel animal !
+              Dis nous en plus sur ton nouvel animal !!
             </Text>
             <View style={tw`flex mt-5 items-center`}>
               <Text style={tw`text-base text-gray-700`}>C'est un : </Text>
@@ -162,7 +162,7 @@ const AddAnimals = () => {
             </View>
             <View style={tw`flex-row mt-5`}>
               <Text style={tw`text-base text-gray-700`}>
-                Tu l'as adopté le :{" "}
+                Tu l'as adopté le :{' '}
               </Text>
               <TextInput
                 placeholder="01/01/2023"
@@ -184,24 +184,24 @@ const AddAnimals = () => {
               <Text style={tw`text-base text-gray-700`}>Sexe : </Text>
               <View style={tw`flex-row `}>
                 <TouchableOpacity
-                  onPress={() => setSelected("Mâle")}
+                  onPress={() => setSelected('Mâle')}
                   style={[
                     tw`rounded-xl shadow-xl p-4 m-2`,
                     {
                       backgroundColor:
-                        selected === "Mâle" ? "#D03312" : "#FFFFFF",
+                        selected === 'Mâle' ? '#D03312' : '#FFFFFF',
                     },
                   ]}
                 >
                   <Text style={tw``}>Mâle</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => setSelected("Femelle")}
+                  onPress={() => setSelected('Femelle')}
                   style={[
                     tw`rounded-xl shadow-xl p-4 m-2`,
                     {
                       backgroundColor:
-                        selected === "Femelle" ? "#D03312" : "#FFFFFF",
+                        selected === 'Femelle' ? '#D03312' : '#FFFFFF',
                     },
                   ]}
                 >
@@ -258,7 +258,7 @@ const AddAnimals = () => {
             </View>
             <View style={tw`flex mt-5 items-center`}>
               <Text style={tw`text-base text-gray-700`}>
-                Dis nous tout sur lui !{" "}
+                Dis nous tout sur lui !{' '}
               </Text>
               <TextInput
                 placeholder="Il est très joueur et aime dormir au soleil..."
@@ -276,7 +276,7 @@ const AddAnimals = () => {
               <Text
                 style={[
                   tw`flex text-base text-white`,
-                  { fontFamily: "Alata_400Regular" },
+                  { fontFamily: 'Alata_400Regular' },
                 ]}
               >
                 Valider
