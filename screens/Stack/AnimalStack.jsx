@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddAnimal from "../AddAnimals";
 import AnimalDetails from "../AnimalDetails";
 import AnimalsList from "../AnimalsList";
+import AddMedical from "../Forms/AddMedical";
 import UpdateAnimalForm from "../Forms/UpdateAnimalForm";
 import MedicalScreen from "../MedicalScreen";
 
@@ -15,6 +16,7 @@ const AnimalsStack = () => {
       <Stack.Screen name="AddAnimal" component={AddAnimal} />
       <Stack.Screen name="Medical" component={MedicalScreen} />
       <Stack.Screen name="UpdateAnimalForm" component={UpdateAnimalForm} />
+      <Stack.Screen name="AddMedical" component={AddMedical} />
     </Stack.Navigator>
   );
 };

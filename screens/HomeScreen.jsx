@@ -1,11 +1,38 @@
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
 import tw from "twrnc";
 import { giraffe } from "../assets";
 import GerbilTalking from "../components/GerbilTalking";
 import NavToAnimals from "../components/NavToAnimals";
+import { auth, db } from "../firebaseConfig";
 
 const HomeScreen = () => {
+  const [username, setUsername] = useState("");
+  const navigation = useNavigation();
+
+  const navigateToArticlesScreen = () => {
+    navigation.navigate("Articles");
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          setUsername(userSnap.data().username);
+        } else {
+          console.log("Aucun document trouvé pour cet utilisateur.");
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <SafeAreaView style={tw`flex`}>
       <ScrollView>
@@ -23,13 +50,13 @@ const HomeScreen = () => {
             <Text
               style={[tw`text-3xl`, { fontFamily: "AutourOne_400Regular" }]}
             >
-              Gerbizzz
+              Animalzz
             </Text>
           </View>
         </View>
         <View style={tw`m-5 mt-7`}>
           <Text style={[tw`text-xl`, { fontFamily: "RobotoMono" }]}>
-            Bonjour Lison & Méline !
+            Bonjour {username}
           </Text>
           <Text
             style={[

@@ -1,2 +1,12 @@
 Au dessus de la navbar sur la page d'accueil une vidéo de petits animaux qui marchent sur la navbar
 Ajouter des oiseaux
+
+table users : level, animalPlayer, animalFun, animalBother, username, age, animalsNumber, profilePic, experiencePoint
+
+Quiz sur comment bien s'occuper de ses animaux et gagner de l'xp
+
+Ajouter des alertes lorsqu'on gagne de l'xp
+
+Badges évolutifs et défis journaliers
+
+Rappels lorsqu'il faut effectuer des actions (changement d'eau, etc...)

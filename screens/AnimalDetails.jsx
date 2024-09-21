@@ -1,24 +1,93 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import React from "react";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useCallback } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
+import {
+  catFace,
+  dog,
+  dogFace,
+  fishFace,
+  gerbil,
+  hamsterFace,
+  hasmter,
+  redPaw,
+  snakeFace,
+} from "../assets";
+import { auth, db } from "../firebaseConfig";
 
 const AnimalDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { animal } = route.params;
+  const { animalId } = route.params;
+  let { animal, backgroundColor } = route.params;
 
   const navigateToMedical = () => {
-    navigation.navigate("Medical");
+    navigation.navigate("Medical", { animalId });
   };
 
   const navigateToUpdateAnimalForm = () => {
     navigation.navigate("UpdateAnimalForm", { animal: animal });
   };
 
+  const getImageFromName = (imageName) => {
+    switch (imageName) {
+      case "dog":
+        return dog;
+      case "dogFace":
+        return dogFace;
+      case "catFace":
+        return catFace;
+      case "fishFace":
+        return fishFace;
+      case "gerbil":
+        return gerbil;
+      case "hamsterFace":
+        return hamsterFace;
+      case "hasmter":
+        return hasmter;
+      case "snakeFace":
+        return snakeFace;
+      default:
+        return dog;
+    }
+  };
+
+  const fetchAnimalDetails = async () => {
+    const animalRef = doc(
+      db,
+      "users",
+      auth.currentUser.uid,
+      "animals",
+      animal.id
+    );
+    const docSnap = await getDoc(animalRef);
+
+    if (docSnap.exists()) {
+      animal = { id: docSnap.id, ...docSnap.data() };
+    } else {
+      console.log("No such document!");
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchAnimalDetails();
+    }, [])
+  );
+
   return (
-    <ScrollView style={tw`flex bg-[#FFE5E4] h-full`}>
+    <ScrollView
+      style={
+        (tw`flex h-full`,
+        { backgroundColor: backgroundColor, borderRadius: 20 })
+      }
+    >
       {/* header */}
       <View style={tw`flex-row items-center justify-between p-5`}>
         <TouchableOpacity
@@ -36,7 +105,26 @@ const AnimalDetails = () => {
       </View>
       {/* Animal 3D */}
       <View style={tw`flex items-center justify-center`}>
-        <Image source={animal.image} style={tw`h-45 w-45`} />
+        <Image
+          source={redPaw}
+          style={[
+            tw`absolute`,
+            { left: -30, top: -20, width: 157, height: 150, opacity: 0.4 },
+            { transform: [{ rotate: "40deg" }] },
+          ]}
+        />
+        <Image
+          source={getImageFromName(animal.imageName)}
+          style={tw`h-45 w-45`}
+        />
+        <Image
+          source={redPaw}
+          style={[
+            tw`absolute`,
+            { right: -30, bottom: -40, width: 157, height: 150, opacity: 0.4 },
+            { transform: [{ rotate: "-40deg" }] },
+          ]}
+        />
       </View>
       {/* White space with animal info */}
       <View style={tw`flex bg-[#F9F9F9] h-full rounded-t-20`}>
@@ -56,7 +144,9 @@ const AnimalDetails = () => {
             <View
               style={tw`flex items-center justify-center bg-[#FFE5E4] h-25 w-25 rounded-2xl ml-5`}
             >
-              <Text style={tw`text-xl text-black font-bold`}>{animal.sex}</Text>
+              <Text style={tw`text-xl text-black font-bold`}>
+                {animal.selected}
+              </Text>
               <Text style={tw`text-base text-gray-500`}>Sexe</Text>
             </View>
             <View
@@ -84,7 +174,7 @@ const AnimalDetails = () => {
             { fontFamily: "Alata_400Regular" },
           ]}
         >
-          {animal.details}
+          {animal.description}
         </Text>
         {/* Additionnals informations */}
         <View style={tw`flex items-center mt-3`}>

@@ -37,14 +37,14 @@ const categories = [
 ];
 
 const Articles = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Tout");
 
   return (
     <SafeAreaView style={tw`flex-1`}>
       <ScrollView contentContainerStyle={tw`p-5`}>
         <View style={tw`items-center mt-10`}>
           <Text style={[tw`text-3xl`, { fontFamily: "AutourOne_400Regular" }]}>
-            Gerbizzz
+            Animalzz
           </Text>
         </View>
         <Text style={[tw`text-2xl mt-10`, { fontFamily: "Alata_400Regular" }]}>

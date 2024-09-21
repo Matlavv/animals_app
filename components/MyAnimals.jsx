@@ -2,104 +2,22 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
-import { catFace, dog } from "../assets";
+import {
+  catFace,
+  dog,
+  dogFace,
+  fishFace,
+  gerbil,
+  hamsterFace,
+  hasmter,
+  redPaw,
+  snakeFace,
+} from "../assets";
 
-const allAnimals = [
-  {
-    id: "1",
-    name: "Luna",
-    category: "Chats",
-    image: catFace,
-    sex: "Femelle",
-    age: "2 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "2",
-    name: "Rex",
-    category: "Chiens",
-    image: dog,
-    sex: "Male",
-    age: "1 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "3",
-    name: "pipou",
-    category: "Chiens",
-    image: dog,
-    sex: "Femelle",
-    age: "2 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "4",
-    name: "poopopp",
-    category: "Chiens",
-    image: dog,
-    sex: "Male",
-    age: "1 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "5",
-    name: "poopopp",
-    category: "Chiens",
-    image: dog,
-    sex: "Femelle",
-    age: "2 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-  {
-    id: "6",
-    name: "poopopp",
-    category: "Chats",
-    image: catFace,
-    sex: "Male",
-    age: "1 ans",
-    weight: "10 kg",
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nisl ac nisi tincidunt tincidunt",
-    favoriteFood: "Croquettes",
-    favoritePlace: "Parc d'Auvers-sur-Oise",
-    favoriteToy: "Balle",
-    adoptionDate: "12/12/2021",
-  },
-];
-
-const MyAnimals = ({ selectedCategory }) => {
+const MyAnimals = ({ selectedCategory, animals }) => {
   const navigation = useNavigation();
-  const filteredAnimals = allAnimals.filter(
+
+  const filteredAnimals = animals.filter(
     (animal) => animal.category === selectedCategory
   );
 
@@ -109,11 +27,37 @@ const MyAnimals = ({ selectedCategory }) => {
     navigation.navigate("AddAnimal");
   };
 
-  const navigateToAnimalDetails = (animal) => {
-    navigation.navigate("AnimalDetails", { animal: animal });
+  const navigateToAnimalDetails = (animal, backgroundColor) => {
+    navigation.navigate("AnimalDetails", {
+      animalId: animal.id,
+      backgroundColor: backgroundColor,
+    });
   };
 
   const backgroundColor = isEven ? "#FFE5E4" : "#D2EBFE";
+
+  const getImageFromName = (imageName) => {
+    switch (imageName) {
+      case "dog":
+        return dog;
+      case "dogFace":
+        return dogFace;
+      case "catFace":
+        return catFace;
+      case "fishFace":
+        return fishFace;
+      case "gerbil":
+        return gerbil;
+      case "hamsterFace":
+        return hamsterFace;
+      case "hasmter":
+        return hasmter;
+      case "snakeFace":
+        return snakeFace;
+      default:
+        return dog;
+    }
+  };
 
   return (
     <View style={tw`mt-10`}>
@@ -126,15 +70,30 @@ const MyAnimals = ({ selectedCategory }) => {
             return (
               <View key={animal.id} style={tw`m-3`}>
                 <TouchableOpacity
-                  onPress={() => navigateToAnimalDetails(animal)}
+                  onPress={() =>
+                    navigateToAnimalDetails(animal, backgroundColor)
+                  }
                   style={[
                     tw`w-40 h-40 rounded-xl items-center justify-center`,
                     { backgroundColor: backgroundColor },
                   ]}
                 >
+                  <View
+                    style={tw`absolute w-full h-full justify-center items-center overflow-hidden`}
+                  >
+                    <Image
+                      source={redPaw}
+                      style={[
+                        tw`w-32 h-30 opacity-20 mt-20 ml-20`,
+                        { transform: [{ rotate: "-45deg" }] },
+                      ]}
+                      resizeMode="cover"
+                    />
+                  </View>
+                  {/* Image de l'animal */}
                   <Image
-                    source={animal.image}
-                    style={tw`w-36 h-36 rounded-xl`}
+                    source={getImageFromName(animal.imageName)}
+                    style={tw`w-36 h-36 rounded-xl z-10`}
                   />
                 </TouchableOpacity>
                 <Text
