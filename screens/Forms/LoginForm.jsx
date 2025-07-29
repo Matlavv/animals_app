@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import { useNavigation } from '@react-navigation/native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import React, { useState } from 'react';
 import {
   Alert,
   Image,
@@ -10,22 +10,22 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
-import tw from "twrnc";
-import { boyDog } from "../../assets";
-import { auth } from "../../firebaseConfig";
+} from 'react-native';
+import tw from 'twrnc';
+import { boyDog } from '../../assets';
+import { auth } from '../../firebaseConfig';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const validateInputs = () => {
-    if (email.length === 0 || !email.includes("@")) {
-      Alert.alert("Erreur", "Veuillez entrer une adresse email valide.");
+    if (email.length === 0 || !email.includes('@')) {
+      Alert.alert('Erreur', 'Veuillez entrer une adresse email valide.');
       return false;
     }
     if (password.length === 0) {
-      Alert.alert("Erreur", "Veuillez entrer un mot de passe.");
+      Alert.alert('Erreur', 'Veuillez entrer un mot de passe.');
       return false;
     }
     return true;
@@ -39,15 +39,15 @@ const LoginForm = () => {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       if (
-        error.code === "auth/user-not-found" ||
-        error.code === "auth/wrong-password"
+        error.code === 'auth/user-not-found' ||
+        error.code === 'auth/wrong-password'
       ) {
         Alert.alert(
-          "Identifiants incorrects",
-          "Email ou mot de passe incorrect."
+          'Identifiants incorrects',
+          'Email ou mot de passe incorrect.',
         );
       } else {
-        Alert.alert("Erreur", error.message);
+        Alert.alert('Erreur', error.message);
       }
     }
   };
@@ -96,7 +96,7 @@ const LoginForm = () => {
         <View style={tw`flex justify-center items-center mt-8`}>
           <Text style={tw`text-black font-semibold text-sm`}>OU</Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate("RegisterForm")}
+            onPress={() => navigation.navigate('RegisterForm')}
             style={tw`w-80 bg-[rgba(255,147,145,0.4)] px-5 py-4 rounded-full flex mt-7 shadow-2xl items-center`}
           >
             <Text style={tw`text-white text-base font-semibold`}>

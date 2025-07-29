@@ -1,17 +1,17 @@
-import { Alata_400Regular } from "@expo-google-fonts/alata";
-import { AutourOne_400Regular, useFonts } from "@expo-google-fonts/autour-one";
-import { Ionicons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useState } from "react";
-import { Keyboard } from "react-native";
-import { auth } from "./firebaseConfig";
-import ChatBot from "./screens/ChatBot";
-import HomeScreen from "./screens/HomeScreen";
-import AnimalsStack from "./screens/Stack/AnimalStack";
-import ProfileStack from "./screens/Stack/ProfileStack";
-import ProfileUnloggedStack from "./screens/Stack/ProfileUnloggedStack";
+import { Alata_400Regular } from '@expo-google-fonts/alata';
+import { AutourOne_400Regular, useFonts } from '@expo-google-fonts/autour-one';
+import { Ionicons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import { onAuthStateChanged } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+import { Keyboard } from 'react-native';
+import { auth } from './firebaseConfig';
+import ChatBot from './screens/ChatBot';
+import HomeScreen from './screens/HomeScreen';
+import AnimalsStack from './screens/Stack/AnimalStack';
+import ProfileStack from './screens/Stack/ProfileStack';
+import ProfileUnloggedStack from './screens/Stack/ProfileUnloggedStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: "#F9F9F9",
+    background: '#F9F9F9',
   },
 };
 
@@ -28,23 +28,23 @@ const App = () => {
   const [initializing, setInitializing] = useState(true);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [fontsLoaded] = useFonts({
-    RobotoMono: require("./assets/fonts/RobotoMono.ttf"),
+    RobotoMono: require('./assets/fonts/RobotoMono.ttf'),
     AutourOne_400Regular,
     Alata_400Regular,
   });
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
+      'keyboardDidShow',
       () => {
         setKeyboardVisible(true);
-      }
+      },
     );
     const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
+      'keyboardDidHide',
       () => {
         setKeyboardVisible(false);
-      }
+      },
     );
 
     return () => {
@@ -71,29 +71,29 @@ const App = () => {
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
-              if (route?.name === "Accueil") {
-                iconName = focused ? "home" : "home-outline";
-              } else if (route?.name === "Mes animaux") {
-                iconName = focused ? "paw" : "paw-outline";
-              } else if (route?.name === "Chat") {
+              if (route?.name === 'Accueil') {
+                iconName = focused ? 'home' : 'home-outline';
+              } else if (route?.name === 'Mes animaux') {
+                iconName = focused ? 'paw' : 'paw-outline';
+              } else if (route?.name === 'Chat') {
                 iconName = focused
-                  ? "chatbox-ellipses"
-                  : "chatbox-ellipses-outline";
-              } else if (route?.name === "Profil") {
-                iconName = focused ? "person" : "person-outline";
+                  ? 'chatbox-ellipses'
+                  : 'chatbox-ellipses-outline';
+              } else if (route?.name === 'Profil') {
+                iconName = focused ? 'person' : 'person-outline';
               }
               return <Ionicons name={iconName} size={25} color={color} />;
             },
-            tabBarActiveTintColor: "#D03312",
-            tabBarInactiveTintColor: "gray",
+            tabBarActiveTintColor: '#D03312',
+            tabBarInactiveTintColor: 'gray',
             tabBarStyle: {
               ...(!keyboardVisible && {
-                backgroundColor: "#F9F9F9",
+                backgroundColor: '#F9F9F9',
                 borderTopWidth: 0,
                 elevation: 0,
                 shadowOpacity: 0,
               }),
-              display: keyboardVisible ? "none" : "flex",
+              display: keyboardVisible ? 'none' : 'flex',
             },
             headerShown: false,
           })}

@@ -1,13 +1,14 @@
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   useFocusEffect,
   useNavigation,
   useRoute,
-} from "@react-navigation/native";
-import { doc, getDoc } from "firebase/firestore";
-import React, { useCallback } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import tw from "twrnc";
+} from '@react-navigation/native';
+import { doc, getDoc } from 'firebase/firestore';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import tw from 'twrnc';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { auth, db } from '../firebaseConfig';
 import {
   catFace,
   dog,
@@ -18,40 +19,41 @@ import {
   hasmter,
   redPaw,
   snakeFace,
-} from "../assets";
-import { auth, db } from "../firebaseConfig";
+} from '../assets';
 
 const AnimalDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { animalId } = route.params;
-  let { animal, backgroundColor } = route.params;
+  let { backgroundColor } = route.params;
+
+  const [animal, setAnimal] = useState(null);
 
   const navigateToMedical = () => {
-    navigation.navigate("Medical", { animalId });
+    navigation.navigate('Medical', { animalId });
   };
 
   const navigateToUpdateAnimalForm = () => {
-    navigation.navigate("UpdateAnimalForm", { animal: animal });
+    navigation.navigate('UpdateAnimalForm', { animal: animal });
   };
 
   const getImageFromName = (imageName) => {
     switch (imageName) {
-      case "dog":
+      case 'dog':
         return dog;
-      case "dogFace":
+      case 'dogFace':
         return dogFace;
-      case "catFace":
+      case 'catFace':
         return catFace;
-      case "fishFace":
+      case 'fishFace':
         return fishFace;
-      case "gerbil":
+      case 'gerbil':
         return gerbil;
-      case "hamsterFace":
+      case 'hamsterFace':
         return hamsterFace;
-      case "hasmter":
+      case 'hasmter':
         return hasmter;
-      case "snakeFace":
+      case 'snakeFace':
         return snakeFace;
       default:
         return dog;
@@ -61,32 +63,37 @@ const AnimalDetails = () => {
   const fetchAnimalDetails = async () => {
     const animalRef = doc(
       db,
-      "users",
+      'users',
       auth.currentUser.uid,
-      "animals",
-      animal.id
+      'animals',
+      animalId, // Utilisation de animalId directement
     );
     const docSnap = await getDoc(animalRef);
 
     if (docSnap.exists()) {
-      animal = { id: docSnap.id, ...docSnap.data() };
+      setAnimal({ id: docSnap.id, ...docSnap.data() });
     } else {
-      console.log("No such document!");
+      console.log('No such document!');
     }
   };
 
   useFocusEffect(
     useCallback(() => {
       fetchAnimalDetails();
-    }, [])
+    }, [animalId]),
   );
+
+  if (!animal) {
+    return (
+      <View style={tw`flex-1 items-center justify-center`}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView
-      style={
-        (tw`flex h-full`,
-        { backgroundColor: backgroundColor, borderRadius: 20 })
-      }
+      style={{ ...tw`flex h-full`, backgroundColor, borderRadius: 20 }}
     >
       {/* header */}
       <View style={tw`flex-row items-center justify-between p-5`}>
@@ -94,13 +101,13 @@ const AnimalDetails = () => {
           onPress={() => navigation.goBack()}
           style={tw`m-3 mt-7 rounded-md bg-white p-2`}
         >
-          <Ionicons name={"chevron-back"} size={25} color="black" />
+          <Ionicons name={'chevron-back'} size={25} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
           style={tw`m-3 mt-7 rounded-md bg-white p-2`}
           onPress={navigateToUpdateAnimalForm}
         >
-          <Ionicons name={"pencil"} size={25} color="black" />
+          <Ionicons name={'pencil'} size={25} color="black" />
         </TouchableOpacity>
       </View>
       {/* Animal 3D */}
@@ -110,7 +117,7 @@ const AnimalDetails = () => {
           style={[
             tw`absolute`,
             { left: -30, top: -20, width: 157, height: 150, opacity: 0.4 },
-            { transform: [{ rotate: "40deg" }] },
+            { transform: [{ rotate: '40deg' }] },
           ]}
         />
         <Image
@@ -122,7 +129,7 @@ const AnimalDetails = () => {
           style={[
             tw`absolute`,
             { right: -30, bottom: -40, width: 157, height: 150, opacity: 0.4 },
-            { transform: [{ rotate: "-40deg" }] },
+            { transform: [{ rotate: '-40deg' }] },
           ]}
         />
       </View>
@@ -132,7 +139,7 @@ const AnimalDetails = () => {
           <Text
             style={[
               tw`text-3xl mt-2 items-center w-40 overflow-hidden text-center`,
-              { fontFamily: "Alata_400Regular" },
+              { fontFamily: 'Alata_400Regular' },
             ]}
           >
             {animal.name}
@@ -171,7 +178,7 @@ const AnimalDetails = () => {
         <Text
           style={[
             tw`text-base text-gray-500 m-2`,
-            { fontFamily: "Alata_400Regular" },
+            { fontFamily: 'Alata_400Regular' },
           ]}
         >
           {animal.description}
@@ -185,7 +192,7 @@ const AnimalDetails = () => {
             <Text
               style={[
                 tw`flex text-base text-gray-500 justify-center m-2 ml-4`,
-                { fontFamily: "Alata_400Regular" },
+                { fontFamily: 'Alata_400Regular' },
               ]}
             >
               Plat préferé : {animal.favoriteFood}
@@ -198,7 +205,7 @@ const AnimalDetails = () => {
             <Text
               style={[
                 tw`flex text-base text-gray-500 justify-center m-2 ml-4`,
-                { fontFamily: "Alata_400Regular" },
+                { fontFamily: 'Alata_400Regular' },
               ]}
             >
               Lieu favoris : {animal.favoritePlace}
@@ -211,7 +218,7 @@ const AnimalDetails = () => {
             <Text
               style={[
                 tw`flex text-base text-gray-500 justify-center m-2 ml-4`,
-                { fontFamily: "Alata_400Regular" },
+                { fontFamily: 'Alata_400Regular' },
               ]}
             >
               Jouet préferé : {animal.favoriteToy}
@@ -226,7 +233,7 @@ const AnimalDetails = () => {
             <Text
               style={[
                 tw`flex text-base text-white`,
-                { fontFamily: "Alata_400Regular" },
+                { fontFamily: 'Alata_400Regular' },
               ]}
             >
               Accéder au suivi médical

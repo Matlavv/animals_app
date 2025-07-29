@@ -1,48 +1,52 @@
-import "dotenv/config";
+import 'dotenv/config';
 
 export default {
   expo: {
-    name: "animals_app",
-    slug: "animals_app",
-    version: "1.0.0",
-    orientation: "portrait",
-    icon: "./assets/icon.png",
-    userInterfaceStyle: "light",
+    name: 'animals_app',
+    slug: 'animals_app',
+    version: '1.0.0',
+    orientation: 'portrait',
+    icon: './assets/icon.png',
+    userInterfaceStyle: 'light',
     splash: {
-      image: "./assets/splash.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff",
+      image: './assets/splash.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff',
     },
-    assetBundlePatterns: ["**/*"],
+    assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
     },
     android: {
+      package: 'com.gerbizz.animals_app',
       adaptiveIcon: {
-        foregroundImage: "./assets/adaptive-icon.png",
-        backgroundColor: "#ffffff",
+        foregroundImage: './assets/adaptive-icon.png',
+        backgroundColor: '#ffffff',
       },
     },
     web: {
-      favicon: "./assets/favicon.png",
+      favicon: './assets/favicon.png',
     },
     plugins: [
       [
-        "expo-font",
+        'expo-font',
         {
-          fonts: ["./assets/fonts/RobotoMono.ttf"],
+          fonts: ['./assets/fonts/RobotoMono.ttf'],
         },
       ],
     ],
     extra: {
       firebaseConfig: {
-        apiKey: process.env.FIREBASE_API_KEY,
-        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-        appId: process.env.FIREBASE_APP_ID,
-        measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+        apiKey: 'AIzaSyCS048UK1tiUPxyrq0BCRcNJSxgmVfHSN8',
+        authDomain: 'animalzz-35e64.firebaseapp.com',
+        projectId: 'animalzz-35e64',
+        storageBucket: 'animalzz-35e64.appspot.com',
+        messagingSenderId: '197197222649',
+        appId: '1:197197222649:web:e3c103fda9068e34c00828',
+        measurementId: 'G-DGDQVHHZGW',
+      },
+      eas: {
+        projectId: '1e91337a-2b06-4fee-ae91-e0a6d367ad70',
       },
     },
   },
